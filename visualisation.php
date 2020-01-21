@@ -48,6 +48,7 @@
         <script src="../lib/datablock.js"></script>
         <script src="../lib/select.js"></script>
         <script src="../lib/geoserver.js"></script>
+        <script src="../lib/jenks.js"></script>
 
         <!-- Main App -->
         <script src="visualisation.js"></script>
