@@ -20,7 +20,8 @@ app = {
     blocks: {
         // left: new Datablock("left-block", "#main-row", true, 4, null, {overflow: false, invert:"pull", new_row:"100"}), 
         // left_select: new Datablock("visualisation-select-territoires", "#visualisation-options", true, 4), 
-        select_zones: new Select("visualisation-select-territoires", "#visualisation-col-left", "api/liste_territoires.php", "Statistiques par EPCI", "zoom_territoire", "Mon territoire"),
+        // select_zones: new Select("visualisation-select-territoires", "#visualisation-col-left", "api/liste_territoires.php", "Statistiques par EPCI", "zoom_territoire", "Mon territoire"),
+        select_zones: new Select("visualisation-select-territoires", "#visualisation-col-left", "api/liste_territoires.php", "Statistiques par EPCI", "", "Mon territoire"),
         // choose_map: new Datablock("visulaisation-btn-map", "#visualisation-col-left", true, 8, "",{btn: {name: "Afficher la carte", action: "show_hide_blocks()"}, hidden_regex:"d-lg-none"}),
 		left_layers: new Datablock("left-layers", "#visualisation-col-left", "manager", 12), 
         mapview: new Datablock("visualisation-col-map", "#visualisation-main-row", true, 8, "",{invert:"push", hidden_regex:"d-lg-block"}),                  
@@ -114,7 +115,7 @@ app.blocks.mapview.createmap({
     // base_layers: [app.baseLayers.Esri_WorldTopoMap, app.baseLayers.GeoportailFrance_orthos], 
     base_layers: [app.baseLayers.Esri_WorldTopoMap], 
     draw: true, legend: true, coords: [43.9, 6.0], zoom: 8, 
-    scale:true
+    scale:true, mapclick:"reset_epci",
 });
  
 
@@ -224,19 +225,38 @@ $("#visualisation-col-map").addClass("d-none");
 // Function spécifique à l'application lancée quand on a sélectionné un territoire
 function cigale_infos_epci(){
     console.log("CIGALE INFOS EPCI");
-    
+    app.info_epci = true;
     // Changer le style du layer EPCI 
-    // FIXME: Faut sélectionner le bon layer
-    app.blocks.mapview.set_style("Emissions de NOx", {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
+    // app.blocks.mapview.set_style(app.active_layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
+    app.blocks.mapview.set_style(app.active.layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
     
     // Ajouter une couche dynamique des émissions communales avec l'id_epci et polluants définis dans les params de l'appli 
-    
-    // Pouvoir revenir à zéro ou changer d'EPCI 
     
 }
 
 
-
+function reset_epci(){
+	if (app.info_epci == true) {
+		console.log("RESET EPCI");
+		// console.log(app.manager[app.active.theme]);
+		// console.log(app.manager[app.active.theme].layers);
+		// console.log(app.active.layer);
+		// console.log(app.manager[app.active.theme].layers[app.active.layer]);
+		// console.log(app.manager[app.active.theme].layers[app.active.layer].style_dict);
+		// console.log(app.manager[app.active.theme].layers[app.active_layer].style_dict);
+		
+		
+		// Change EPCI layer style
+		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);	
+		// app.blocks.mapview.set_style(app.active.layer, app.manager[app.active.theme].layers[app.active_layer].style_dict);
+		
+		// FIXME: App.active.layer !!
+			
+		// Zoom to all EPCI layers
+		
+		app.info_epci = false;
+	};
+}
 
 
 
