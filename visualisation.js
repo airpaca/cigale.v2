@@ -225,8 +225,15 @@ $("#visualisation-col-map").addClass("d-none");
 // Function spécifique à l'application lancée quand on a sélectionné un territoire
 function cigale_infos_epci(){
     console.log("CIGALE INFOS EPCI");
-    app.info_epci = true;
-    // Changer le style du layer EPCI 
+	// console.log(val, token);
+    
+	app.info_epci = true;
+
+	// FIXME: Cette fonction est dupliquée si on fait du onclick
+	app.blocks.mapview.get_territoire(app.territoire, app.territoire_token);
+	
+    
+	// Changer le style du layer EPCI 
     // app.blocks.mapview.set_style(app.active_layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
     app.blocks.mapview.set_style(app.active.layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
     
@@ -238,21 +245,18 @@ function cigale_infos_epci(){
 function reset_epci(){
 	if (app.info_epci == true) {
 		console.log("RESET EPCI");
-		// console.log(app.manager[app.active.theme]);
-		// console.log(app.manager[app.active.theme].layers);
-		// console.log(app.active.layer);
-		// console.log(app.manager[app.active.theme].layers[app.active.layer]);
-		// console.log(app.manager[app.active.theme].layers[app.active.layer].style_dict);
-		// console.log(app.manager[app.active.theme].layers[app.active_layer].style_dict);
-		
-		
+	
 		// Change EPCI layer style
 		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);	
-		// app.blocks.mapview.set_style(app.active.layer, app.manager[app.active.theme].layers[app.active_layer].style_dict);
-		
-		// FIXME: App.active.layer !!
 			
 		// Zoom to all EPCI layers
+		app.blocks.mapview.map.fitBounds(app.blocks.mapview.layers[app.active.layer].layer.getBounds());
+		
+		// Remove layer territoire 
+		app.blocks.mapview.layers["Territoire"].remove(app.blocks.mapview.map); 
+		
+		// Reset select list 
+		app.blocks.select_zones.reset();
 		
 		app.info_epci = false;
 	};
