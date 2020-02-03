@@ -9,8 +9,38 @@ console.log("CIGALE - Visualisation");
 
 geoserver = new Geoserver("https://geoservices.atmosud.org/geoserver/");
 
+
+
+cigale_theme_manager = function (){
+	// FIXLE: doit être crée dans ou avans l'app !?
+	console.log("CIGALE THEME MANAGER FNUCTION");
+    
+	// Si layer actif et layer emi_comm alors on l'update 
+	if ( (typeof app.blocks.mapview.layers["emi_comm"] != "undefined") && ($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked == true) ) {
+        console.log("UPDATING EMICOMM");
+		cigale_infos_epci();
+	};
+    
+    // Si la couche n'est pas affichée alors on affiche pas les émissions communales
+    console.log($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked);
+    if ($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked == false) {
+        console.log("ON SUPPRIME LES EMI COMM");
+		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
+		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);	        
+    };
+    
+};
+
+
+
+
+
 // App conf
 app = {
+	theme_manager_special_func: cigale_theme_manager,
+	// theme_manager_special_func: function (){
+		// console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	// },
     get_territoire_app_function: 'cigale_infos_epci',
     server: geoserver,
     active: {
@@ -122,19 +152,19 @@ app.blocks.mapview.createmap({
 layers2create = {
     "nox": {manager: "Polluants atmosphériques", title: "Emissions de NOx", add_map: true, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
     "pm10": {manager: "Polluants atmosphériques", title: "Emissions de PM10", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
-    "pm2.5": {manager: "Polluants atmosphériques", title: "Emissions de PM2.5", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
-    "covnm": {manager: "Polluants atmosphériques", title: "Emissions de COVNM", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    "so2": {manager: "Polluants atmosphériques", title: "Emissions de SO<sub>2</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    "nh3": {manager: "Polluants atmosphériques", title: "Emissions de NH<sub>3</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    "co": {manager: "Polluants atmosphériques", title: "Emissions de CO", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    // "pm2.5": {manager: "Polluants atmosphériques", title: "Emissions de PM2.5", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    // "covnm": {manager: "Polluants atmosphériques", title: "Emissions de COVNM", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    // "so2": {manager: "Polluants atmosphériques", title: "Emissions de SO<sub>2</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    // "nh3": {manager: "Polluants atmosphériques", title: "Emissions de NH<sub>3</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    // "co": {manager: "Polluants atmosphériques", title: "Emissions de CO", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
     
     "conso": {manager: "Bilans énergétiques", title: "Consommations d&#039;énergie finale", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']}, 
-    "prod": {manager: "Bilans énergétiques", title: "Production d&#039;énergie", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']},     
+    // "prod": {manager: "Bilans énergétiques", title: "Production d&#039;énergie", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']},     
     
     "co2": {manager: "Gaz à effet de serre", title: "Emissions de CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
-    "ch4.co2e": {manager: "Gaz à effet de serre", title: "Emissions de CH<sub>4</sub> eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
-    "n2o.co2e": {manager: "Gaz à effet de serre", title: "Emissions de C<sub>2</sub>O eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
-    "prg100.3ges": {manager: "Gaz à effet de serre", title: "PRG 100", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
+    // "ch4.co2e": {manager: "Gaz à effet de serre", title: "Emissions de CH<sub>4</sub> eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
+    // "n2o.co2e": {manager: "Gaz à effet de serre", title: "Emissions de C<sub>2</sub>O eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
+    // "prg100.3ges": {manager: "Gaz à effet de serre", title: "PRG 100", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
 };
 
 
@@ -168,45 +198,7 @@ for (var alyr in layers2create) {
                 
             }
         );
-    
-    // app.manager[layers2create[alyr].manager].layers[layers2create[alyr].title + " commune"] = 
-		// geoserver.lfCreateLayerWMS(layers2create[alyr].title, "cigale:comm_poll", app.blocks.mapview, false, [10,20],
-		// layers2create[alyr].manager,{
-			// // header: "Injection dans le réseau gaz",
-			// pane: "front", 
-			// legend: true,
-		// });	//"nom_abrege_polluant='"+alyr+"'"
-	
-    /*
-    app.manager[layers2create[alyr].manager].layers[layers2create[alyr].title + " commune"] =
-        geoserver.lfCreateLayerWFS(
-            layers2create[alyr].title + " commune", "cigale:comm_poll", app.blocks.mapview, layers2create[alyr].add_map, [10,20], 
-            layers2create[alyr].manager, {
-                cql_filter: "nom_abrege_polluant='"+alyr+"'",
-                visible: false,
-                legend_carriage: true, 
-                legend_title: layers2create[alyr].title+" 2017 en kg/km<sup>2</sup>",
-                name_field : "nom_comm",
-                attributes_dict : {"nom_comm": "Nom Commune", "id_comm": "Code Commune", "nom_abrege_polluant": "Polluant", "val": "Emissions"},
-                style_dict: {
-                    pane: 'front',
-                    fillColor: "white", color: "black", weight: 0.5, 
-                    opacity: 0.8, fillOpacity: 0.5,
-                    classes: {
-                        field: "val", param: "fillColor", grades: [
-                            [4474,"#f7fcf5"],
-                            [9273,"#d5efcf"],
-                            [18858,"#9ed898"],
-                            [32371,"#54b567"],
-                            [59646,"#1d8641"],
-                            [208824000,"#00441b"]
-                        ]     
-                    },            
-                },            
-                
-            }
-        );        
-    */    
+   
 };
  
 // Create manager 
@@ -224,12 +216,11 @@ $("#visualisation-col-map").addClass("d-none");
 
 // Function spécifique à l'application lancée quand on a sélectionné un territoire
 function cigale_infos_epci(){
-    console.log("CIGALE INFOS EPCI");
-	// console.log(val, token);
+	console.log("CIGALE INFO EPCI")
+    
     
 	app.info_epci = true;
 
-	// FIXME: Cette fonction est dupliquée si on fait du onclick
 	app.blocks.mapview.get_territoire(app.territoire, app.territoire_token);
 	
     
@@ -237,31 +228,89 @@ function cigale_infos_epci(){
     // app.blocks.mapview.set_style(app.active_layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
     app.blocks.mapview.set_style(app.active.layer, {fillColor: "#ededed", color: "black", weight: 0.5, opacity: 0.8, fillOpacity: 0.8,});
     
+	// Remove epci layers from legend 
+	// FIXME: Mieux Maj legend;
+	app.blocks.mapview.removeToLegend(app.blocks.mapview.layers[app.active.layer].id);
+	
     // Ajouter une couche dynamique des émissions communales avec l'id_epci et polluants définis dans les params de l'appli 
-    
+	console.log("siren_epci	= '"+ app.territoire_token + "' and " + app.blocks.mapview.layers[app.active.layer].cql_filter.replace("&cql_filter=",""));
+	
+	if (typeof app.blocks.mapview.layers["emi_comm"] != "undefined") {
+		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
+		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);
+	};
+	
+	geoserver.lfCreateLayerWFS(
+		"emi_comm", "cigale:comm_poll", app.blocks.mapview, true, [0,20], 
+		"NoTheme", {
+			cql_filter: "siren_epci	= '"+ app.territoire_token + "' and " + app.blocks.mapview.layers[app.active.layer].cql_filter.replace("&cql_filter=",""), 
+			zoomonclick: false, 
+			territoireonclick: false, 
+			popup: true,
+			unique: false,
+			// fonction: "modalRatios();",fonction_desc: "Modifier les ratios de mobilisation",
+			legend_carriage: true, 
+			legend_title: app.blocks.mapview.layers[app.active.layer].legend_title,
+			name_field : "nom_comm",
+			attributes_dict : {"nom_comm": "Nom Commune", "id_comm": "Code Commune", "nom_abrege_polluant": "Polluant", "val": "Emissions kg/km<sup>2</sup>"},
+			style_dict: {
+				pane: 'front',
+				fillColor: "white", color: "black", weight: 0.5, 
+				opacity: 0.8, fillOpacity: 0.5,
+				jenks: {field: "val", njenks: 6, colorscale: app.blocks.mapview.layers[app.active.layer].style_orig.jenks.colorscale, param: "fillColor"},
+			},            
+			
+		}
+	);
+	
+	
 }
 
 
 function reset_epci(){
+    
+    
 	if (app.info_epci == true) {
 		console.log("RESET EPCI");
+       
+
+		// Remove layer emi_comm
+		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
+		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);
+        delete app.blocks.mapview.layers["emi_comm"];
 	
-		// Change EPCI layer style
-		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);	
-			
+		// Change EPCI layer style (and precedent if needed)
+		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);			
+		app.blocks.mapview.addToLegend(app.blocks.mapview.layers[app.active.layer]["legend"].html);
+
+        if (typeof app.active.layer_precedent != "undefined") {
+
+            // FIXME: Reset EPCI colors, Est-ce qu'on peut pas le faire directement pour tous les layers par défaut?
+            app.blocks.mapview.set_style(app.active.layer_precedent, app.blocks.mapview.layers[app.active.layer_precedent].style_orig);		
+            
+            // Faut aussi faire les epci par défaut du thème
+            for (var theme in app.manager){
+                app.blocks.mapview.set_style(app.manager[theme].default_layers[0], app.blocks.mapview.layers[app.manager[theme].default_layers[0]].style_orig);	
+            };
+            
+		};
+        
+        
+        
 		// Zoom to all EPCI layers
 		app.blocks.mapview.map.fitBounds(app.blocks.mapview.layers[app.active.layer].layer.getBounds());
 		
 		// Remove layer territoire 
 		app.blocks.mapview.layers["Territoire"].remove(app.blocks.mapview.map); 
-		
+		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["Territoire"].id);
+		delete app["territoire"];
+        
 		// Reset select list 
 		app.blocks.select_zones.reset();
+        console.log("BBBBBBBBBBBB RESET ZONES CHANGE TERRITOIRE");
 		
 		app.info_epci = false;
 	};
 }
-
-
 
 
