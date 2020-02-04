@@ -22,7 +22,6 @@ cigale_theme_manager = function (){
 	};
     
     // Si la couche n'est pas affichée alors on affiche pas les émissions communales
-    console.log($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked);
     if ($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked == false) {
         console.log("ON SUPPRIME LES EMI COMM");
 		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
@@ -38,9 +37,6 @@ cigale_theme_manager = function (){
 // App conf
 app = {
 	theme_manager_special_func: cigale_theme_manager,
-	// theme_manager_special_func: function (){
-		// console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-	// },
     get_territoire_app_function: 'cigale_infos_epci',
     server: geoserver,
     active: {
@@ -105,6 +101,7 @@ app = {
                 "Emissions de NOx",
 				"Emissions de NOx commune",
             ],
+            info: false,
         },
         "Bilans énergétiques": {
             id: 2,
@@ -118,6 +115,7 @@ app = {
                 "Consommations d&#039;énergie finale",
                 "Consommations d&#039;énergie finale commune",
             ],
+            info: false,
         },
         "Gaz à effet de serre": {
             id: 3,
@@ -132,6 +130,7 @@ app = {
                 "Emissions de CO<sub>2</sub>",
                 "Emissions de CO<sub>2</sub> commune",
             ],
+            info: false,
         },      
     }
 };
@@ -233,8 +232,6 @@ function cigale_infos_epci(){
 	app.blocks.mapview.removeToLegend(app.blocks.mapview.layers[app.active.layer].id);
 	
     // Ajouter une couche dynamique des émissions communales avec l'id_epci et polluants définis dans les params de l'appli 
-	console.log("siren_epci	= '"+ app.territoire_token + "' and " + app.blocks.mapview.layers[app.active.layer].cql_filter.replace("&cql_filter=",""));
-	
 	if (typeof app.blocks.mapview.layers["emi_comm"] != "undefined") {
 		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
 		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);
@@ -280,8 +277,12 @@ function reset_epci(){
         delete app.blocks.mapview.layers["emi_comm"];
 	
 		// Change EPCI layer style (and precedent if needed)
-		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);			
-		app.blocks.mapview.addToLegend(app.blocks.mapview.layers[app.active.layer]["legend"].html);
+		app.blocks.mapview.set_style(app.active.layer, app.blocks.mapview.layers[app.active.layer].style_orig);
+
+        // Si le layer est affiché alors on met à jour la légende.
+        if ($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked == true) {
+            app.blocks.mapview.addToLegend(app.blocks.mapview.layers[app.active.layer]["legend"].html);
+        }
 
         if (typeof app.active.layer_precedent != "undefined") {
 
@@ -307,7 +308,6 @@ function reset_epci(){
         
 		// Reset select list 
 		app.blocks.select_zones.reset();
-        console.log("BBBBBBBBBBBB RESET ZONES CHANGE TERRITOIRE");
 		
 		app.info_epci = false;
 	};

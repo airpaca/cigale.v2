@@ -111,7 +111,8 @@ a.badge.badge-pill.badge-info-collapsed:active, a.badge.badge-pill.badge-info-co
     font-size: 14px;text-align: left;}
 .legend i {width: 18px;height: 18px;float: left;margin-right: 8px;opacity: 0.7;}
 .legend .colorcircle {border-radius: 50%;width: 15px;height: 15px;margin-right: 5px;padding:0px;}
-.legend-title{margin-top:3vh;}
+.legend-title{margin-top:1vh;}
+.close{width:100%; text-align:right;}
 
 /* Switches */
 .switch {position: relative;display: inline-block;width: 30px;height: 17px;float:right;margin-top:1%;}
