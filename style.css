@@ -55,6 +55,9 @@ a:hover {color: #50c3e5; text-decoration:none;}
 .visualisation-col-left-footer{height:11vh !important;}
 .visualisation-col-map-header{margin-top:11vh; height:11vh !important;}
 .visualisation-col-map {margin-top:10vh; height: 90vh;}
+.visualisation-report-block {margin-top:10vh; height: 90vh;} 
+#visialisation-row-graphiques {width:100% !important; margin:0vh;overflow-y: auto; scrollbar-color: #e8e8e8 white; scrollbar-width: auto;} 
+div[id^="visualisation-graph-block-"] {border: 1px solid lightgrey;}
 
 #left-layers{padding-left:0px; padding-right:0px;}
   

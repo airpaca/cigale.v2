@@ -33,13 +33,15 @@
             
                 <div class="col-lg-4 visualisation-col-left d-lg-block" id="visualisation-col-left"></div> 
 
+                <!-- Pour les petits écrans -->
                 <div class="col-lg-4 visualisation-col-left-footer d-lg-none" id="visualisation-col-left-footer">
 					<button type="button" class="btn btn-outline-info col-btn" onclick="second_screen_display(1)">Afficher la carte</button>
 				</div> 
- 
+                 
                 <div class="col-lg-4 visualisation-col-map-header d-none d-lg-none" id="visualisation-col-map-header">
 					<button type="button" class="btn btn-outline-info col-btn" onclick="second_screen_display(0)">Modifier la sélection</button>
 				</div> 
+              
 				
             </div> 
         </div>       

@@ -25,7 +25,7 @@ cigale_theme_manager = function (){
     if ($("#chk-"+app.blocks.mapview.layers[app.active.layer].id)[0].checked == false) {
         console.log("ON SUPPRIME LES EMI COMM");
 		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
-		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);	        
+		app.blocks.mapview.removeToLegend(app.blocks.mapview.layers["emi_comm"].id);	       
     };
     
 };
@@ -50,9 +50,9 @@ app = {
         select_zones: new Select("visualisation-select-territoires", "#visualisation-col-left", "api/liste_territoires.php", "Statistiques par EPCI", "", "Mon territoire"),
         // choose_map: new Datablock("visulaisation-btn-map", "#visualisation-col-left", true, 8, "",{btn: {name: "Afficher la carte", action: "show_hide_blocks()"}, hidden_regex:"d-lg-none"}),
 		left_layers: new Datablock("left-layers", "#visualisation-col-left", "manager", 12), 
-        mapview: new Datablock("visualisation-col-map", "#visualisation-main-row", true, 8, "",{invert:"push", hidden_regex:"d-lg-block"}),                  
-        // FIXME: Si on fait comme btn mais avec un create map on peut directement déclencher la création de la carte lors de la creation du block
-		// report: new Datablock("report-block", "#main-row", "hide", 12),                                    
+        mapview: new Datablock("visualisation-col-map", "#visualisation-main-row", true, 8, "",{invert:"push", hidden_regex:"d-lg-block"}),                                                      
+		// report: new Datablock("visualisation-report-block", "#visualisation-main-row", true, 4, "", {start_hidden:true,}),                                    
+		report: new Datablock("visualisation-report-block", "#visualisation-main-row", "hide", 4, "", {btn_close: "cigale_close_plots"}),      // FIXME: Faut choisir entre hide et start hidden                              
     },
     baseLayers: {
         Esri_WorldTopoMap: {
@@ -216,8 +216,7 @@ $("#visualisation-col-map").addClass("d-none");
 // Function spécifique à l'application lancée quand on a sélectionné un territoire
 function cigale_infos_epci(){
 	console.log("CIGALE INFO EPCI")
-    
-    
+       
 	app.info_epci = true;
 
 	app.blocks.mapview.get_territoire(app.territoire, app.territoire_token);
@@ -259,17 +258,37 @@ function cigale_infos_epci(){
 			
 		}
 	);
-	
+    
+
+    // Affichage de la zone graphique
+    $("#visualisation-report-block").empty();    
+	$("#visualisation-report-block").append('<button type="button" onclick="event.stopPropagation(); cigale_close_plots(true);" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+    cigale_display_plots();	
+
+    // Création des blocks graphiques 
+    // FIXME: Faut mettre la possibilité de fixer un row à la création d'un block et lui attribuer son id à lui et non au block
+    $("#visualisation-report-block").append('<div class="row" id="visialisation-row-graphiques"></div>');
+
+    app.blocks.graph_a = new Datablock("visualisation-graph-block-A", "#visialisation-row-graphiques", true, 12, "", {graphique:{type:'header', data:'data.php'}});
+    app.blocks.graph_a = new Datablock("visualisation-graph-block-B", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'bar', data:'data.php'}});
+    app.blocks.graph_a = new Datablock("visualisation-graph-block-C", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'line', data:'data.php'}});
+    app.blocks.graph_a = new Datablock("visualisation-graph-block-D", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'pie', data:'data.php'}});
+    app.blocks.graph_a = new Datablock("visualisation-graph-block-E", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'pie', data:'data.php'}});
+    
 	
 }
-
 
 function reset_epci(){
     
     
 	if (app.info_epci == true) {
 		console.log("RESET EPCI");
+
+        app.info_epci = false;
        
+        // Cache les graphiques 
+        cigale_close_plots();
+
 
 		// Remove layer emi_comm
 		app.blocks.mapview.layers["emi_comm"].remove(app.blocks.mapview.map);
@@ -309,8 +328,49 @@ function reset_epci(){
 		// Reset select list 
 		app.blocks.select_zones.reset();
 		
-		app.info_epci = false;
+
+        
+
 	};
 }
 
+function cigale_display_plots(){
+      
+       console.log("CIGALE DISPLAY PLOTS");
+       
+        // Si les graphiques sont cachés ou que l'on est en train d'observer les émissions communales
+        if (    ( $("#visualisation-report-block"+this.name).hasClass("d-none") ) || (app.info_epci == true) ) {
+            $("#visualisation-report-block"+this.name).removeClass("d-none"); 
+            $("#visualisation-report-block"+this.name).addClass("d-lg-block");  
+            
+            $("#visualisation-col-map"+this.name).removeClass("col-lg-8"); 
+            $("#visualisation-col-map"+this.name).addClass("col-lg-4"); 
+            
+            app.blocks.mapview.map.invalidateSize();
+        // Si les 
+        } else {
+            $("#visualisation-report-block"+this.name).addClass("d-none"); 
+            $("#visualisation-report-block"+this.name).removeClass("d-lg-block");  
+            
+            $("#visualisation-col-map"+this.name).removeClass("col-lg-4"); 
+            $("#visualisation-col-map"+this.name).addClass("col-lg-8"); 
+            
+            app.blocks.mapview.map.invalidateSize();        
+        };
 
+};
+
+function cigale_close_plots(){
+      
+       console.log("CIGALE CLOSE PLOTS");
+       
+        $("#visualisation-report-block"+this.name).addClass("d-none"); 
+        $("#visualisation-report-block"+this.name).removeClass("d-lg-block");  
+        
+        $("#visualisation-col-map"+this.name).removeClass("col-lg-4"); 
+        $("#visualisation-col-map"+this.name).addClass("col-lg-8"); 
+        
+        app.blocks.mapview.map.invalidateSize();        
+
+
+};
