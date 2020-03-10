@@ -469,9 +469,14 @@ app.manager["Débouchés pour le biogaz"].layers = {
     "Réseau de distribution de gaz à moins de 10km": geoserver.lfCreateLayerWMS("Réseau de distribution de gaz à moins de 10km", "cigale:dbg_grdf_reseau_5_10km", app.blocks.mapview, false, [0,20], "Débouchés pour le biogaz", {
         pane: "front"
     }), 
-    "Réseau de transport à moins de 5km": geoserver.CreatelayerEnConstruction("Réseau de transport à moins de 5km", "En cours de construction", app.blocks.mapview, false, [0,0], "Débouchés pour le biogaz",{
-        tooltip: "Cette couche sera disponible prochainement",
+    
+    // "Réseau de transport à moins de 5km": geoserver.CreatelayerEnConstruction("Réseau de transport à moins de 5km", "En cours de construction", app.blocks.mapview, false, [0,0], "Débouchés pour le biogaz",{
+        // tooltip: "Cette couche sera disponible prochainement",
+    // }),
+    "Réseau de transport à moins de 5km": geoserver.lfCreateLayerWMS("Réseau de transport à moins de 5km", "cigale_wms:dbg_grtgaz", app.blocks.mapview, false, [0,20], "Débouchés pour le biogaz",{
+        pane: "top"
     }),
+  
 
     "Réseau électrique RTE": geoserver.CreatelayerEnConstruction("Réseau électrique RTE", "En cours de construction", app.blocks.mapview, false, [0,0], "Débouchés pour le biogaz",{
         header: "Cogénération",
@@ -492,7 +497,10 @@ app.manager["Débouchés pour le biogaz"].layers = {
     "Points de collecte": geoserver.CreatelayerEnConstruction("Points de collecte", "En cours de construction", app.blocks.mapview, false, [0,0], "Débouchés pour le biogaz",{
         header: "Gaz porté",
         tooltip: "Cette couche sera disponible prochainement",
-    }),    
+    }),   
+
+
+   
 };
 
 app.manager["Débouchés pour le digestat"].layers = {

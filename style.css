@@ -86,7 +86,7 @@ div[id^="visualisation-graph-block-"] {margin-bottom:3vh !important; border: 0px
 .dataTables_scroll{width:100% !important;}
 .dataTables_scrollBody{height:50vh !important;max-height:50vh !important; width:100% !important;}
 .extraction-confirm{padding:2vh;}
-.modal-footer{padding:0rem;margin-top:2vh;} 
+/*.modal-footer{padding:0rem;margin-top:2vh;} */
 #extraction-cgu{float:left;margin-left: 2vh;}
 #extraction-logo{float:left;}
  
@@ -210,6 +210,8 @@ input:checked + .slider:before {-webkit-transform: translateX(13px);-ms-transfor
 
 
 /* -----------------------CSS DU RAPPORT GERES ------------------------*/
+.map-block{margin-top:10vh;}
+
 .alert-center {
     margin-top: 15%;
     margin-left: 25%;
@@ -286,6 +288,26 @@ input:checked + .slider:before {-webkit-transform: translateX(13px);-ms-transfor
   background-color: #4CAF50;
   color: white;
 }
+
+
+
+.modal-content{max-height:80vh;scrollbar-color: #e8e8e8 white; scrollbar-width: auto;}
+.modal-content .close {width:10%;}
+
+#urlModalTitle {
+    width: 80%;
+    font-family: font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+	color: #3498DB;
+    text-align: left;
+    margin-top: 0%;
+    margin-bottom: 0%;    
+}
+.modal-content{
+    overflow:auto;
+}
+.modal-content .modal-footer{margin-bottom:2vh !important;margin-right:2vh !important;}
+
 /*---------------------------------------------------------------------*/
 
 
