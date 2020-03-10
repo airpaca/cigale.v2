@@ -31,14 +31,14 @@
         <div class="container-fluid" id="visualisation-options">            
             <div class="row" id="visualisation-main-row">
             
-                <div class="col-lg-4 visualisation-col-left d-lg-block" id="visualisation-col-left"></div> 
+                <div class="col-lg-3 visualisation-col-left d-lg-block" id="visualisation-col-left"></div> 
 
                 <!-- Pour les petits écrans -->
-                <div class="col-lg-4 visualisation-col-left-footer d-lg-none" id="visualisation-col-left-footer">
+                <div class="col-lg-3 visualisation-col-left-footer d-lg-none" id="visualisation-col-left-footer">
 					<button type="button" class="btn btn-outline-info col-btn" onclick="second_screen_display(1)">Afficher la carte</button>
 				</div> 
                  
-                <div class="col-lg-4 visualisation-col-map-header d-none d-lg-none" id="visualisation-col-map-header">
+                <div class="col-lg-3 visualisation-col-map-header d-none d-lg-none" id="visualisation-col-map-header">
 					<button type="button" class="btn btn-outline-info col-btn" onclick="second_screen_display(0)">Modifier la sélection</button>
 				</div> 
               
@@ -47,10 +47,12 @@
         </div>       
 
         <!-- App scripts -->
+        <script src="config.js"></script>        
         <script src="../lib/datablock.js"></script>
         <script src="../lib/select.js"></script>
         <script src="../lib/geoserver.js"></script>
         <script src="../lib/jenks.js"></script>
+        <script src="../lib/charts.js"></script>
 
         <!-- Main App -->
         <script src="visualisation.js"></script>

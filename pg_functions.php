@@ -28,7 +28,7 @@ function execute_sql($sql) {
 
     // Returns JSON 
     header('Content-Type: application/json');
-    echo json_encode($array_result);
+    echo json_encode($array_result, JSON_NUMERIC_CHECK);
     
 };
 
@@ -69,7 +69,7 @@ function execute_sql_multi($sql_list) {
 
     // Returns JSON */
     header('Content-Type: application/json');
-    echo json_encode($results);
+    echo json_encode($results, JSON_NUMERIC_CHECK);
 
 };
 

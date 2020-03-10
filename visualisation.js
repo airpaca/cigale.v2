@@ -50,9 +50,9 @@ app = {
         select_zones: new Select("visualisation-select-territoires", "#visualisation-col-left", "api/liste_territoires.php", "Statistiques par EPCI", "", "Mon territoire"),
         // choose_map: new Datablock("visulaisation-btn-map", "#visualisation-col-left", true, 8, "",{btn: {name: "Afficher la carte", action: "show_hide_blocks()"}, hidden_regex:"d-lg-none"}),
 		left_layers: new Datablock("left-layers", "#visualisation-col-left", "manager", 12), 
-        mapview: new Datablock("visualisation-col-map", "#visualisation-main-row", true, 8, "",{invert:"push", hidden_regex:"d-lg-block"}),                                                      
+        mapview: new Datablock("visualisation-col-map", "#visualisation-main-row", true, 9, "",{invert:"push", hidden_regex:"d-lg-block"}),                                                      
 		// report: new Datablock("visualisation-report-block", "#visualisation-main-row", true, 4, "", {start_hidden:true,}),                                    
-		report: new Datablock("visualisation-report-block", "#visualisation-main-row", "hide", 4, "", {btn_close: "cigale_close_plots"}),      // FIXME: Faut choisir entre hide et start hidden                              
+		report: new Datablock("visualisation-report-block", "#visualisation-main-row", "hide", 6, "", {btn_close: "cigale_close_plots"}),      // FIXME: Faut choisir entre hide et start hidden                              
     },
     baseLayers: {
         Esri_WorldTopoMap: {
@@ -147,29 +147,30 @@ app.blocks.mapview.createmap({
     scale:true, mapclick:"reset_epci",
 });
  
-
 layers2create = {
-    "nox": {manager: "Polluants atmosphériques", title: "Emissions de NOx", add_map: true, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
-    "pm10": {manager: "Polluants atmosphériques", title: "Emissions de PM10", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
-    // "pm2.5": {manager: "Polluants atmosphériques", title: "Emissions de PM2.5", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
-    // "covnm": {manager: "Polluants atmosphériques", title: "Emissions de COVNM", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    // "so2": {manager: "Polluants atmosphériques", title: "Emissions de SO<sub>2</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    // "nh3": {manager: "Polluants atmosphériques", title: "Emissions de NH<sub>3</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
-    // "co": {manager: "Polluants atmosphériques", title: "Emissions de CO", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    "nox": {id: 38, manager: "Polluants atmosphériques", title: "Emissions de NOx", add_map: true, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    "pm10": {id:65, manager: "Polluants atmosphériques", title: "Emissions de PM10", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    "pm2.5": {id:108, manager: "Polluants atmosphériques", title: "Emissions de PM2.5", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
+    "covnm": {id:16, manager: "Polluants atmosphériques", title: "Emissions de COVNM", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    "so2": {id:48, manager: "Polluants atmosphériques", title: "Emissions de SO<sub>2</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    "nh3": {id:36, manager: "Polluants atmosphériques", title: "Emissions de NH<sub>3</sub>", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']},  
+    "co": {id:11, manager: "Polluants atmosphériques", title: "Emissions de CO", add_map: false, colorscale: ['#ffeda0', '#feb24c', '#f03b20']}, 
     
-    "conso": {manager: "Bilans énergétiques", title: "Consommations d&#039;énergie finale", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']}, 
-    // "prod": {manager: "Bilans énergétiques", title: "Production d&#039;énergie", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']},     
+    "conso": {id: 131, manager: "Bilans énergétiques", title: "Consommations d&#039;énergie finale", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']}, 
+    "prod": {id: 999, manager: "Bilans énergétiques", title: "Production d&#039;énergie", add_map: false, colorscale: ['#fde0dd', '#fa9fb5', '#c51b8a']},     
     
-    "co2": {manager: "Gaz à effet de serre", title: "Emissions de CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
-    // "ch4.co2e": {manager: "Gaz à effet de serre", title: "Emissions de CH<sub>4</sub> eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
-    // "n2o.co2e": {manager: "Gaz à effet de serre", title: "Emissions de C<sub>2</sub>O eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
-    // "prg100.3ges": {manager: "Gaz à effet de serre", title: "PRG 100", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
+    "co2": {id: 15, manager: "Gaz à effet de serre", title: "Emissions de CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
+    "ch4.co2e": {id: 123, manager: "Gaz à effet de serre", title: "Emissions de CH<sub>4</sub> eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
+    "n2o.co2e": {id: 124, manager: "Gaz à effet de serre", title: "Emissions de C<sub>2</sub>O eq.CO<sub>2</sub>", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},        
+    "prg100.3ges": {id: 128, manager: "Gaz à effet de serre", title: "PRG 100", add_map: false, colorscale: ['#f9ebea', '#cd6155', '#cb4335']},     
 };
 
 
 
 
 for (var alyr in layers2create) {
+	
+	// var html = "<div id='popup'><a href='extraction.php'>Extraction des données sur cette commune</a></div>"; 
     
     app.manager[layers2create[alyr].manager].layers[layers2create[alyr].title] = 
         geoserver.lfCreateLayerWFS(
@@ -193,7 +194,8 @@ for (var alyr in layers2create) {
                     fillColor: "white", color: "black", weight: 0.5, 
                     opacity: 0.8, fillOpacity: 0.5,
                     jenks: {field: "val", njenks: 6, colorscale: layers2create[alyr].colorscale, param: "fillColor"},
-                },            
+                },
+                special: {polluant:alyr},
                 
             }
         );
@@ -214,6 +216,8 @@ $("#visualisation-col-map").addClass("d-none");
 
 
 // Function spécifique à l'application lancée quand on a sélectionné un territoire
+// FIXME:  Faire en sorte que l'on reste sur le graf du bas (par ex) au changement de variable
+
 function cigale_infos_epci(){
 	console.log("CIGALE INFO EPCI")
        
@@ -243,6 +247,16 @@ function cigale_infos_epci(){
 			zoomonclick: false, 
 			territoireonclick: false, 
 			popup: true,
+			popup_extra: "<div id='popup'><a href='extraction.php'>Extraction des données sur cette commune</a></div>",
+			session_storage_click: function test(e) {
+				
+				sessionStorage.id_comm = e.target.feature.properties.id_comm
+				// sessionStorage.id_polluant = app.active.layer;
+				sessionStorage.id_polluant = layers2create[app.blocks.mapview.layers[app.active.layer].special.polluant].id;
+				
+				console.log(sessionStorage.id_comm, sessionStorage.id_polluant);
+				console.log("AAAAAAAAAAAAAAAAAAAAAA");
+			},
 			unique: false,
 			// fonction: "modalRatios();",fonction_desc: "Modifier les ratios de mobilisation",
 			legend_carriage: true, 
@@ -255,7 +269,7 @@ function cigale_infos_epci(){
 				opacity: 0.8, fillOpacity: 0.5,
 				jenks: {field: "val", njenks: 6, colorscale: app.blocks.mapview.layers[app.active.layer].style_orig.jenks.colorscale, param: "fillColor"},
 			},            
-			
+			special: {polluant: alyr},
 		}
 	);
     
@@ -265,16 +279,230 @@ function cigale_infos_epci(){
 	$("#visualisation-report-block").append('<button type="button" onclick="event.stopPropagation(); cigale_close_plots(true);" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
     cigale_display_plots();	
 
-    // Création des blocks graphiques 
+    // Création des blocks graphiques selon le thème
     // FIXME: Faut mettre la possibilité de fixer un row à la création d'un block et lui attribuer son id à lui et non au block
-    $("#visualisation-report-block").append('<div class="row" id="visialisation-row-graphiques"></div>');
-
-    app.blocks.graph_a = new Datablock("visualisation-graph-block-A", "#visialisation-row-graphiques", true, 12, "", {graphique:{type:'header', data:'data.php'}});
-    app.blocks.graph_a = new Datablock("visualisation-graph-block-B", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'bar', data:'data.php'}});
-    app.blocks.graph_a = new Datablock("visualisation-graph-block-C", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'line', data:'data.php'}});
-    app.blocks.graph_a = new Datablock("visualisation-graph-block-D", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'pie', data:'data.php'}});
-    app.blocks.graph_a = new Datablock("visualisation-graph-block-E", "#visialisation-row-graphiques", true, 6, "", {graphique:{type:'pie', data:'data.php'}});
+    $("#visualisation-report-block").append('<div class="row" id="visualisation-row-graphiques"></div>');
     
+	// $("#visualisation-report-block").append('<div class="row" id="visualisation-row-graphiques"></div>');
+
+	// Titre du graph
+	// $("#visualisation-row-graphiques").append('<div id="visualisation-graph-title">'+app.territoire.replace("''", "'")+'</br>Emissions de '+app.blocks.mapview.layers[app.active.layer].special.polluant+'</div>');
+
+
+    if (app.active.theme == "Polluants atmosphériques") {
+        
+
+		// Titre du graph
+		$("#visualisation-row-graphiques").append('<div id="visualisation-graph-title">'+app.territoire.replace("''", "'")+'</br>Emissions de '+app.blocks.mapview.layers[app.active.layer].special.polluant+'</div>');
+		
+		new Datablock("visualisation-graph-block-A", "#visualisation-row-graphiques", true, 6, "", {
+            graphique:{
+                type:'pie',
+                data: "api/emi_repartiton_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-A",
+                title: "Répartition séctorielle " + cfg_anmax,
+                tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+                option: {}
+            }
+        });
+
+        new Datablock("visualisation-graph-block-B", "#visualisation-row-graphiques", true, 6, "", {
+            graphique:{
+                type:'bar',
+                data: "api/emi_total_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-B",
+                title: "Evolution pluriannuelle (t) ",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        });      
+
+        new Datablock("visualisation-graph-block-C", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'line',
+                data: "api/emi_secteurs_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-C",
+                title: "Evolution sectorielle pluriannuelle (t) ",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        }); 
+
+        new Datablock("visualisation-graph-block-D", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'pie',
+                data: "api/emi_part_epci_reg.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-D",
+                title: "Part de l'EPCI dans les émissions régionales ",
+                tooltip:'{point.y:.1f}',
+                option: {labels: true,}
+            }
+        }); 
+
+       
+    } else if ( (app.active.theme == "Bilans énergétiques") && (app.active.layer == "Consommations d&#039;énergie finale")  ){
+
+		// Titre du graph
+		$("#visualisation-row-graphiques").append('<div id="visualisation-graph-title">'+app.territoire.replace("''", "'")+'</br>Consommations d\'énergie</div>');
+
+		new Datablock("visualisation-graph-block-A", "#visualisation-row-graphiques", true, 6, "", {
+			graphique:{
+				type:'pie',
+				data: "api/conso_repartiton_epci.php", 
+				params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+				container_id: "visualisation-graph-block-A",
+				title: "Consommation finale par sécteurs " + cfg_anmax,
+				tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+				option: {}
+			}
+		});
+		
+		new Datablock("visualisation-graph-block-B", "#visualisation-row-graphiques", true, 6, "", {
+			graphique:{
+				type:'pie',
+				data: "api/conso_repartiton_epci_energie.php", 
+				params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+				container_id: "visualisation-graph-block-B",
+				title: "Consommation finale par énergie " + cfg_anmax,
+				tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+				option: {}
+			}
+		});	
+
+        new Datablock("visualisation-graph-block-C", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'line',
+                data: "api/conso_secteurs_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-C",
+                title: "Evolution sectorielle pluriannuelle. Energie finale (ktep)",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        });		
+
+        new Datablock("visualisation-graph-block-D", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'pie',
+                data: "api/conso_part_epci_reg.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-D",
+                title: "Part de l'EPCI dans les consommations régionales ",
+                tooltip:'{point.y:.1f}',
+                option: {labels: true,}
+            }
+        }); 
+
+    } else if ( (app.active.theme == "Bilans énergétiques") && (app.active.layer == "Production d&#039;énergie")  ){
+
+		// Titre du graph
+		$("#visualisation-row-graphiques").append('<div id="visualisation-graph-title">'+app.territoire.replace("''", "'")+'</br>Production d\'énergie</div>');
+
+		new Datablock("visualisation-graph-block-A", "#visualisation-row-graphiques", true, 6, "", {
+			graphique:{
+				type:'pie',
+				data: "api/prod_primaire_epci_filieres.php", 
+				params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+				container_id: "visualisation-graph-block-A",
+				title: "Energies primaires par filières " + cfg_anmax,
+				tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+				option: {}
+			}
+		});
+		
+        new Datablock("visualisation-graph-block-B", "#visualisation-row-graphiques", true, 6, "", {
+            graphique:{
+                type:'bar',
+                data: "api/prod_prim_sec_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-B",
+                title: "Energies primaires/secondaires (GWh)",
+                tooltip:'{point.y:.0f}',
+                option: {stacked: true},
+            }
+        }); 
+
+        new Datablock("visualisation-graph-block-C", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'line',
+                data: "api/prod_primaire_epci_filieres_plurian.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-C",
+                title: "Evolution des production primaires. Par filières (GWh)",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        });		
+
+        new Datablock("visualisation-graph-block-D-prod", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'line',
+                data: "api/prod_secondaire_epci_filieres_plurian.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-D-prod",
+                title: "Evolution des production secondaires. Par filières (GWh)",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        });	
+		
+    } else if (app.active.theme == "Gaz à effet de serre"){ 
+
+		// Titre du graph
+		$("#visualisation-row-graphiques").append('<div id="visualisation-graph-title">'+app.territoire.replace("''", "'")+'</br>Emissions de '+app.blocks.mapview.layers[app.active.layer].special.polluant+'</div>');
+	
+		new Datablock("visualisation-graph-block-A", "#visualisation-row-graphiques", true, 6, "", {
+            graphique:{
+                type:'pie',
+                data: "api/ges_repartiton_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-A",
+                title: "Répartition séctorielle " + cfg_anmax,
+                tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+                option: {}
+            }
+        });
+
+		new Datablock("visualisation-graph-block-B", "#visualisation-row-graphiques", true, 6, "", {
+            graphique:{
+                type:'pie',
+                data: "api/ges_repartiton_epci_energie.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-B",
+                title: "Répartition énergétique " + cfg_anmax,
+                tooltip:'{series.name} {point.percentage:.0f}% ({point.y})t',
+                option: {}
+            }
+        });     
+
+        new Datablock("visualisation-graph-block-C", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'line',
+                data: "api/ges_secteurs_epci.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-C",
+                title: "Evolution sectorielle pluriannuelle. Emissions indirectes (t)",
+                tooltip:'{point.y:.0f}',
+                option: {}
+            }
+        }); 
+
+        new Datablock("visualisation-graph-block-D", "#visualisation-row-graphiques", true, 12, "", {
+            graphique:{
+                type:'pie',
+                data: "api/ges_part_epci_reg.php", 
+                params: {siren_epci: app.territoire_token, polluant: app.blocks.mapview.layers[app.active.layer].special.polluant, an: cfg_anmax},
+                container_id: "visualisation-graph-block-D",
+                title: "Part de l'EPCI dans les émissions régionales ",
+                tooltip:'{point.y:.1f}',
+                option: {labels: true,}
+            }
+        }); 
+    };
 	
 }
 
@@ -343,8 +571,8 @@ function cigale_display_plots(){
             $("#visualisation-report-block"+this.name).removeClass("d-none"); 
             $("#visualisation-report-block"+this.name).addClass("d-lg-block");  
             
-            $("#visualisation-col-map"+this.name).removeClass("col-lg-8"); 
-            $("#visualisation-col-map"+this.name).addClass("col-lg-4"); 
+            $("#visualisation-col-map"+this.name).removeClass("col-lg-9"); 
+            $("#visualisation-col-map"+this.name).addClass("col-lg-3"); 
             
             app.blocks.mapview.map.invalidateSize();
         // Si les 
@@ -352,8 +580,8 @@ function cigale_display_plots(){
             $("#visualisation-report-block"+this.name).addClass("d-none"); 
             $("#visualisation-report-block"+this.name).removeClass("d-lg-block");  
             
-            $("#visualisation-col-map"+this.name).removeClass("col-lg-4"); 
-            $("#visualisation-col-map"+this.name).addClass("col-lg-8"); 
+            $("#visualisation-col-map"+this.name).removeClass("col-lg-3"); 
+            $("#visualisation-col-map"+this.name).addClass("col-lg-9"); 
             
             app.blocks.mapview.map.invalidateSize();        
         };
@@ -368,7 +596,7 @@ function cigale_close_plots(){
         $("#visualisation-report-block"+this.name).removeClass("d-lg-block");  
         
         $("#visualisation-col-map"+this.name).removeClass("col-lg-4"); 
-        $("#visualisation-col-map"+this.name).addClass("col-lg-8"); 
+        $("#visualisation-col-map"+this.name).addClass("col-lg-9"); 
         
         app.blocks.mapview.map.invalidateSize();        
 

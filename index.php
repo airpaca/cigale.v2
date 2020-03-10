@@ -64,19 +64,26 @@
                         <p>Visualiser les cartes et bilans par territoire des inventaires.</p>
                     </div>            
                     <div class="col-lg-6 index-body-pages-cols">
-                        <a href='visualisation.php'><img src="img/icones/feather/92px.2px.blue/sliders.svg" 
+                        <a href='extraction.php'><img src="img/icones/feather/92px.2px.blue/sliders.svg" 
                             onmouseover="this.src='img/icones/feather/92px.2px.clearblue/sliders.svg';" 
                             onmouseout="this.src='img/icones/feather/92px.2px.blue/sliders.svg';"></a>                    
                         <h4>Extraction</h4>
                         <p>Extraire et exporter les données d'inventaires.</p>
                     </div> 
                     <div class="col-lg-6 index-body-pages-cols">
-                        <a href='visualisation.php'><img src="img/icones/feather/92px.2px.blue/layers.svg" 
+                        <a href='methanisation.php'><img src="img/icones/feather/92px.2px.blue/layers.svg" 
                             onmouseover="this.src='img/icones/feather/92px.2px.clearblue/layers.svg';" 
                             onmouseout="this.src='img/icones/feather/92px.2px.blue/layers.svg';"></a>                    
                         <h4>Méthanisation</h4>
                         <p>Application CIGALE développée en partenariat avec le GERES pour le développement de la méthanisation.</p>
-                    </div>                          
+                    </div>  
+                    <div class="col-lg-6 index-body-pages-cols">
+                        <a href='campagnes.php'><img src="img/icones/feather/92px.2px.blue/feather.svg" 
+                            onmouseover="this.src='img/icones/feather/92px.2px.clearblue/feather.svg';" 
+                            onmouseout="this.src='img/icones/feather/92px.2px.blue/feather.svg';"></a>                    
+                        <h4>Campagnes de Mesure</h4>
+                        <p>Toutes les campagnes de mesures AtmoSud.</p>
+                    </div>					
                     <div class="col-lg-6 index-body-pages-cols">
                         <a href='visualisation.php'><img src="img/icones/feather/92px.2px.blue/info.svg" 
                             onmouseover="this.src='img/icones/feather/92px.2px.clearblue/info.svg';" 
@@ -85,11 +92,11 @@
                         <p>Notes méthodologiques et informations pour les utilisateurs.</p>
                     </div>    
                     <div class="col-lg-6 index-body-pages-cols">
-                        <a href='apis.php'><img src="img/icones/feather/92px.2px.blue/cloud.svg" 
-                            onmouseover="this.src='img/icones/feather/92px.2px.clearblue/cloud.svg';" 
-                            onmouseout="this.src='img/icones/feather/92px.2px.blue/cloud.svg';"></a>                    
+                        <a href='apis.php'><img src="img/icones/feather/92px.2px.blue/codesandbox.svg" 
+                            onmouseover="this.src='img/icones/feather/92px.2px.clearblue/codesandbox.svg';" 
+                            onmouseout="this.src='img/icones/feather/92px.2px.blue/codesandbox.svg';"></a>                    
                         <h4>API(s)</h4>
-                        <p>Accédez aux données présentées dans CIGALE à travers des API cartographiques.</p>
+                        <p>Interroger les API.</p>
                     </div>                     
             </div> 
             

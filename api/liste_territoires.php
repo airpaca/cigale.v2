@@ -2,7 +2,6 @@
 
 include '../pg_functions.php';
 
-
 $sql = "
 SELECT rang_entite as order_field, code_entite as valeur, lib_entite as val 
 FROM referentiel.entites 
