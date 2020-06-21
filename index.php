@@ -51,7 +51,7 @@
                     <h3>Dernières actualités</h3>
                     <p>2019-12-17 - Changement du format de restitution pour les consommations et émissions de GES de la branche production d'énergie.</p>
                     <p>2019-12-17 - Publication de l'inventaire v6.2, qui remplace la version précédente.</p>
-                    <a href="methodo.php#mise-jour-des-donn-es">Plus d'informations sur les mises à jour</a>
+                    <a href="documentation.php#mise-jour-des-donn-es">Plus d'informations sur les mises à jour</a>
                 </div> 
             </div>  
             
@@ -85,7 +85,7 @@
                         <p>Toutes les campagnes de mesures AtmoSud.</p>
                     </div>					
                     <div class="col-lg-6 index-body-pages-cols">
-                        <a href='visualisation.php'><img src="img/icones/feather/92px.2px.blue/info.svg" 
+                        <a href='documentation.php'><img src="img/icones/feather/92px.2px.blue/info.svg" 
                             onmouseover="this.src='img/icones/feather/92px.2px.clearblue/info.svg';" 
                             onmouseout="this.src='img/icones/feather/92px.2px.blue/info.svg';"></a>                    
                         <h4>Documentation</h4>

@@ -247,7 +247,7 @@ function cigale_infos_epci(){
 			zoomonclick: false, 
 			territoireonclick: false, 
 			popup: true,
-			popup_extra: "<div id='popup'><a href='extraction.php'>Extraction des données sur cette commune</a></div>",
+			popup_extra: "<div class='popup-extra' id='popup'><a href='extraction.php'>Extraction des données sur cette commune</a></div>",
 			session_storage_click: function test(e) {
 				
 				sessionStorage.id_comm = e.target.feature.properties.id_comm

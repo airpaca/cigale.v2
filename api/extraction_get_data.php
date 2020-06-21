@@ -17,6 +17,7 @@ $query_detail_comm = $_GET['query_detail_comm'];
 
 
 
+
 /* Ecriture du code SQL de la requête */
 
 // SI CO2 tot alors on recherche polluants 121 et 122
@@ -92,14 +93,18 @@ if ($query_var != "999") {
         $query_entite == "84" 
         )
         && 
-        strpos($query_entite_nom, "Parc Naturel ") === false
+        strpos($query_entite_nom, "PARC NATUREL ") === false
     ) {        
         $where =  $where . " and id_comm / 1000 in (" . $query_entite . ")";
-    } elseif (strlen ($query_entite) == 9) {
+    
+	
+	} elseif (strlen ($query_entite) == 9 && strpos($query_entite_nom, "PARC NATUREL ") !== 0) {
         $where =  $where . " and id_comm in (select distinct id_comm from commun.tpk_commune_2015_2016 where siren_epci_2017 = " . $query_entite . ")";
-    } elseif (strpos($query_entite_nom, "Parc Naturel ") !== false) {
-        // echo "PNR</br>";
-		$where =  $where . " and " . $query_entite . " = any(id_pnr)";		     
+    
+	
+	} elseif (strpos($query_entite_nom, "PARC NATUREL ") == 0) {
+		// $where =  $where . " and '" . $query_entite . "' = any(id_pnr)";			
+		$where =  $where . " and (select id from geres.alp_pnr where code_pnr = '" . $query_entite . "') = any(id_pnr)";	
 	} else {
         $where =  $where . " and id_comm in (" . $query_entite . ")";
     };
@@ -147,8 +152,15 @@ if ($query_var != "999") {
         sum(case when " . $ss . " is TRUE and " . $ss_field . " is TRUE then null else val end) as val, 
         case when " . $ss . " is TRUE and " . $ss_field . " is TRUE then NULL else id_unite end as id_unite
         from total.bilan_comm_v" . $v_inv . "_diffusion 
-        " . $where . "     
-        -- and (id_secteur_pcaet, id_polluant) not in (('1', 131),('1', 15),('1', 128))    
+        
+		
+		
+		" . $where . "     
+        
+		
+		
+		
+		-- and (id_secteur_pcaet, id_polluant) not in (('1', 131),('1', 15),('1', 128))    
         -- and (id_secteur_pcaet, id_polluant) not in (('1', 131),('1', 15),('1', 128),('1', 123),('1', 124))    
 		and ext_pcaet is true -- and (id_secteur_pcaet, id_polluant) not in (('1', 131),('1', 121),('1', 122),('1', 128),('1', 123),('1', 124))
         and hors_bilan is false 
@@ -203,15 +215,16 @@ if ($query_var != "999") {
         $champ_geo = " '" . $query_entite_nom . "'::text ";
         $where_entite = " and id_comm / 1000 = " . $query_entite . " ";
     // Si EPCI
-    } elseif (strlen ($query_entite) == 9) {
+    } elseif (strlen ($query_entite) == 9 && strpos($query_entite_nom, "PARC NATUREL ") !== 0) {
         // $champ_geo = "a.nom_epci";
         $champ_geo = "a.nom_epci_2018 as nom_epci";
         $where_entite = " and a.siren_epci_2018 = " . $query_entite . " ";
         $champ_geo_grpby = " , a.nom_epci_2018";
 	// PNR
-    } elseif (strpos($query_entite_nom, "Parc Naturel ") !== false) {
+    } elseif (strpos($query_entite_nom, "PARC NATUREL ") == 0) {
 		$champ_geo = " (select nom from geres.alp_pnr where id = " . $query_entite . ") ";
-		$where_entite =  " and id_comm in (SELECT DISTINCT id_comm FROM total.bilan_comm_v6_diffusion WHERE " . $query_entite . " = any(id_pnr)) ";	
+		// $where_entite =  " and id_comm in (SELECT DISTINCT id_comm FROM total.bilan_comm_v6_diffusion WHERE " . $query_entite . " = any(id_pnr)) ";	
+		$where_entite =  " and id_comm in (SELECT DISTINCT id_comm FROM total.bilan_comm_v6_diffusion WHERE (select id from geres.alp_pnr where code_pnr = '" . $query_entite . "') = any(id_pnr)) ";	
 	// Si on est à la commune
     } else {
         // $champ_geo = "nom_comm";

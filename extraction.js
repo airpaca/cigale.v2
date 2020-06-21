@@ -490,7 +490,7 @@ function afficher_donnees(){
    
     // Mise à jour de la date et de l'heure de l'extraction
     var extraction_time = datehour();
-    $(".extraction-header").html('<img id="extraction-logo" src="img/LogoAtmosud.small.png"><text id="extraction-cgu">AtmoSud - Inventaire v' + cfg_vinv + '.' + cfg_sous_vinv + ' - Extraction du ' + extraction_time + '</br><a target="_blank" href="methodo.php#conditions-d-utilisation-des-donn-es">Consulter les conditions d\'utilisation et de diffusion</a></text>');
+    $(".extraction-header").html('<img id="extraction-logo" src="img/LogoAtmosud.small.png"><text id="extraction-cgu">AtmoSud - Inventaire v' + cfg_vinv + '.' + cfg_sous_vinv + ' - Extraction du ' + extraction_time + '</br><a href="documentation.php#conditions-d-utilisation-des-donn-es">Consulter les conditions d\'utilisation et de diffusion</a></text>');
 };
 
 

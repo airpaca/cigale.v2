@@ -51,7 +51,8 @@
 				<li class="nav-item ml-auto"><a href="#" onclick="app.blocks.mapview.print_map();">Enregistrer la carte</a></li>
 				<li class="nav-item ml-auto"><a href="#" onclick="didacticiel()">Didacticiel</a></li>
 			';}	?>            
-			<li class="nav-item ml-auto"><a href="methodo.php">Documentation</a></li>			
+			<li class="nav-item ml-auto"><a href="index.php">Accueil</a></li>			
+			<li class="nav-item ml-auto"><a href="documentation.php">Documentation</a></li>			
             <li class="nav-item ml-auto"><a href="user.php">Mon espace</a></li>
             <li class="nav-item ml-auto"><a href="contact.php">Contact</a></li>
         </ul>
