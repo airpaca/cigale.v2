@@ -28,7 +28,7 @@ function didacticiel(){
     // Steps 
     var enjoyhint_script_steps = [
       {
-        "next .breadcrumb" : "<div class=\"row\" style=\"overflow-y: auto;\"><div class=\"col-lg-12\" style=\"overflow-y: auto;\">Bienenue sur l'application méthanisation de CIGALE</br>réalisée en partenariat par le <text style='color: #00a6eb'>GERES</text> et <text style='color: #00a6eb'>AtmoSud</text>.</br></br><img src='../img/LogoAtmosud.small.png' alt='AtmoSud'></div></div>"
+        "next .breadcrumb" : "<div class=\"row\" style=\"overflow-y: auto;\"><div class=\"col-lg-12\" style=\"overflow-y: auto;\">Bienenue sur l'application méthanisation de CIGALE</br>réalisée en partenariat par le consortium <text style='color: #00a6eb'>Métha'Synergie</text> et <text style='color: #00a6eb'>AtmoSud</text>.</br></br><img src='../img/thumbnail_methasynergie_logo_fond_transparent.png' alt='Métha\'Synergie' width='20%'></br></br><img src='../img/LogoAtmosud.small.png' alt='AtmoSud'></div></div>"
         ,showSkip: false
       },
       {

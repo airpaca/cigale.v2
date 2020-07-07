@@ -602,3 +602,32 @@ function cigale_close_plots(){
 
 
 };
+
+
+
+
+
+
+
+/* 
+L.tileLayer(
+        "https://geoservices.atmosud.org/geoserver/gwc/service/wmts?" +
+        "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
+        "&STYLE=normal" +
+        "&TILEMATRIXSET=EPSG:900913" +
+        // "&TILEMATRIXSET=azurjour" +
+        "&FORMAT=image/png8"+
+        "&LAYER=azurjour:paca-no2-2020-02-01"+
+		"&TILEMATRIX=EPSG:900913:{z}" +
+		// "&TILEMATRIX=azurjour:{z}" +
+        "&TILEROW={y}" +
+        "&TILECOL={x}",
+	{
+		minZoom : 0,
+		maxZoom : 18,
+        attribution : "AtmoSud",
+		opacity: 0.5,
+		tileSize : 256 // les tuiles du Géooportail font 256x256px
+	}
+).addTo(app.blocks.mapview.map);
+ */
